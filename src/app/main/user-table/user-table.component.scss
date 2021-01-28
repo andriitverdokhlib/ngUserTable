@@ -1,0 +1,54 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+
+$cell-height: 5vh;
+
+:host {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+
+    .container {
+        margin: 0;
+
+        .add-btn {
+            @include default-btn(12vw, 5vh);
+            background: #9fa9e2;
+            margin-bottom: 2vh;
+        }
+        
+        table {
+            padding: 1vh;
+            width: 70vw;
+            box-shadow: $container-shadows;
+
+            th {
+                width: 15vw;
+                height: $cell-height;
+                text-align: inherit;
+            }
+
+            tr {
+                padding: 1vh;
+                height: 3vh;
+                border: 1px solid black;
+
+                td {
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
+
+
+
+.td-action {
+    display: flex;
+    justify-content: center;
+
+    button {
+        @include default-btn(100%, 3vh);
+    }
+}

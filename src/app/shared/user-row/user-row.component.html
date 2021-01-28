@@ -1,0 +1,37 @@
+<ng-container *ngIf="editModeEnabled; else userData">
+    <td>
+        <input type="text" name="name" 
+            [(ngModel)]="userInfo.name" required #name="ngModel" minlength="3">
+    </td>
+    <td>
+        <input type="text" name="email" 
+            [(ngModel)]="userInfo.email" required email #email="ngModel" minlength="6">
+    </td>
+    <td>
+        <input type="text" name="phone" ngxPhoneMask
+            [(ngModel)]="userInfo.phone" #phone="ngModel" required minlength="6">
+    </td>
+
+    <td class="td-action" *ngIf="editModeEnabled">
+        <button class="btn-submit" [disabled]="name?.invalid || email?.invalid || phone?.invalid" 
+            (click)="saveChanges()">Save</button>
+    
+        <button class="btn-danger" (click)="cancel()">Cancel</button>
+    </td>
+
+</ng-container>
+
+<ng-template #userData>
+
+    <td>{{userInfo.name}}</td>
+    <td>{{userInfo.email}}</td>
+    <td>{{userInfo.phone}}</td>
+
+</ng-template>
+
+<td class="td-action" *ngIf="!editModeEnabled">
+
+    <button class="btn-submit" (click)="switchEditMode()">Edit</button>
+    <button class="btn-danger" (click)="removeUser()">Delete</button>
+    
+</td>

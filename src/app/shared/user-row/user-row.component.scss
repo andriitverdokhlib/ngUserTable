@@ -1,0 +1,25 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+
+
+.td-action {
+    display: flex;
+    flex-direction: row;
+    height: inherit;
+
+    button {
+        @include default-btn(100%, 3vh);
+    }
+}
+
+td {
+    padding: 5px;
+
+    input {
+        height: 2.5vh;
+        width: 98%;
+
+        border-color: $input-border-color;
+        border-width: 1px;
+    }
+}

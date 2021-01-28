@@ -1,0 +1,23 @@
+<div class="container">
+
+    <ng-container *ngIf="isAdding; else addBtn">
+        <add-pannel pannelType="add" (onAddedUser)="onAddedUser($event)"></add-pannel>
+    </ng-container>
+
+    <ng-template #addBtn>
+        <button class="add-btn"(click)="switchAdding()">Add user</button>
+    </ng-template>
+
+    <table>
+
+        <tr class="tr-headers">
+            <th *ngFor="let ch of headerCells">{{ch}}</th>
+        </tr>
+
+        <tr *ngFor="let user of (users$ | async)" user-row 
+            [userInfo]="user" (onDeletedUsers)="onDeletedUser($event)">
+        </tr>
+
+    </table>
+
+</div>

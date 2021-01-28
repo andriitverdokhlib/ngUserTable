@@ -1,0 +1,23 @@
+<form [formGroup]="userForm" class="form-group">
+    <div class="form-control">
+        <label>Name</label>
+        <input name="name" formControlName="name">
+    </div>
+
+    <div class="form-control">
+        <label>Email</label>
+        <input name="email" formControlName="email">
+    </div>
+
+    <div class="form-control">
+        <label>Phone</label>
+        <input name="phone" ngxPhoneMask formControlName="phone">
+    </div>
+</form>
+
+<div class="action-container">
+    <button class="btn-submit" (click)="addUser()" [disabled]="userForm.invalid">Submit</button>
+    <button class="btn-danger" (click)="cancel()">Cancel</button>
+</div>
+
+
