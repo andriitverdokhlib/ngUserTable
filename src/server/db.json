@@ -7,22 +7,16 @@
       "id": 1
     },
     {
-      "name": "Alex",
+      "name": "Andrii",
       "email": "22@gmail.com",
-      "phone": "+380959237053",
+      "phone": "+380934343488",
       "id": 2
     },
     {
-      "name": "Sam",
-      "email": "sam2@gmail.com",
-      "phone": "+15457896787",
+      "name": "test",
+      "email": "22@gmail.com",
+      "phone": "+232323232",
       "id": 3
-    },
-    {
-      "name": "test2",
-      "email": "test2@icloud.com",
-      "phone": "+232323333232",
-      "id": 4
     }
   ]
 }

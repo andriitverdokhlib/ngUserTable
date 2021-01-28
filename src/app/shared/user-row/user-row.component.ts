@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -11,13 +11,15 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './user-row.component.html',
   styleUrls: ['./user-row.component.scss']
 })
-export class UserRowComponent implements OnDestroy{
+export class UserRowComponent implements OnInit, OnDestroy{
 
   @Input('userInfo')
   public userInfo: IUser;
 
   @Output()
   private onDeletedUsers = new EventEmitter<void>();
+
+  private originalUserInfo: IUser;
 
   public editModeEnabled: boolean = false;
 
@@ -26,6 +28,10 @@ export class UserRowComponent implements OnDestroy{
   constructor(
     private userService: UserService
   ) { }
+
+  ngOnInit(): void {
+    this.originalUserInfo = { ...this.userInfo };
+  }
 
   ngOnDestroy(): void {
     this.destroyer$.next();
@@ -49,6 +55,8 @@ export class UserRowComponent implements OnDestroy{
   }
 
   public cancel(): void {
+    this.userInfo = { ...this.originalUserInfo };
+
     this.switchEditMode();
   }
 

@@ -4,23 +4,29 @@
 }
 
 .btn-submit {
-    background: rgb(166, 190, 166);
+    background: rgb(145, 178, 194);
 }
 
 .btn-danger {
-    background: #e99c96;
+    background: #bb7873;
 }
 
 input {
-    padding: 3px
-}
+    padding: 3px;
+    border: none;
+    border-bottom: 1px solid rgb(177, 163, 163);
 
+    &:focus {
+        outline: none;
+        border-bottom: 2px solid rgb(172, 172, 226);
+    }
+}
 
 input.ng-touched.ng-invalid {
-    border:solid rgb(192, 124, 124) 2px;
-    border-radius: 5px;
+    border-bottom: 2px solid rgb(235, 107, 107);
+    border-radius: 2px;
 }
 input.ng-touched.ng-valid {
-    border-radius: 5px;
-    border:solid rgb(181, 231, 181) 2px;
+    border-radius: 2px;
+    border-bottom: 2px solid rgb(95, 173, 95);
 }
