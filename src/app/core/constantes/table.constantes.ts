@@ -1,0 +1,1 @@
+export const CELL_HEADERS: string[] = ['Name', 'Email', 'Phone', 'Actions'];

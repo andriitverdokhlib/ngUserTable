@@ -11,7 +11,7 @@
     <table>
 
         <tr class="tr-headers">
-            <th *ngFor="let ch of headerCells">{{ch}}</th>
+            <th *ngFor="let ch of cellHeaders">{{ch}}</th>
         </tr>
 
         <tr *ngFor="let user of (users$ | async)" user-row 

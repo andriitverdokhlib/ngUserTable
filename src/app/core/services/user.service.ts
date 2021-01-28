@@ -9,25 +9,23 @@ import { IUser } from '../models/user.model';
 })
 export class UserService {
 
-  private baseUrl: string = 'http://localhost:3000';
-
   constructor(
     private http: HttpClient
   ) { }
 
   public getUsers(): Observable<IUser[]> {
-    return this.http.get<IUser[]>(`${this.baseUrl}/users`);
+    return this.http.get<IUser[]>('users');
   }
 
   public addUser(userDbo: IUser): Observable<IUser> {
-    return this.http.post<IUser>(`${this.baseUrl}/users`, userDbo);
+    return this.http.post<IUser>('users', userDbo);
   }
 
   public editUser(userDbo: IUser): Observable<IUser> {
-    return this.http.put<IUser>(`${this.baseUrl}/users/${userDbo.id}`, userDbo);
+    return this.http.put<IUser>(`users/${userDbo.id}`, userDbo);
   }
 
   public removeUser(userId: number): Observable<IUser> {
-    return this.http.delete<IUser>(`${this.baseUrl}/users/${userId}`);
+    return this.http.delete<IUser>(`users/${userId}`);
   }
 }

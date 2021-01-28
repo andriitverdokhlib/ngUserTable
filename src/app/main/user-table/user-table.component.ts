@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { CELL_HEADERS } from 'src/app/core/constantes/table.constantes';
 import { IUser } from 'src/app/core/models/user.model';
 
 import { UserService } from 'src/app/core/services/user.service';
@@ -17,7 +18,7 @@ export class UserTableComponent implements OnInit {
   public isAdding: boolean = false;
   public selectedUser: number;
 
-  public headerCells: string[] = ['Name', 'Email', 'Phone', 'Actions'];
+  public cellHeaders: string[] = CELL_HEADERS;
 
   constructor(
     private userService: UserService
