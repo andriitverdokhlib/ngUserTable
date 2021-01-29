@@ -1,7 +1,7 @@
-import { 
+import {
   ChangeDetectionStrategy,
-  Component, ElementRef, EventEmitter, 
-  Input, OnDestroy, Output, ViewChild 
+  Component, ElementRef, EventEmitter,
+  Input, OnDestroy, OnInit, Output, ViewChild
 } from '@angular/core';
 
 import { Subject } from 'rxjs';
@@ -16,29 +16,33 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./user-row.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserRowComponent implements OnDestroy{
+export class UserRowComponent implements OnInit, OnDestroy{
 
   @Input('userInfo')
   public userInfo: IUser;
 
   @Output()
-  private onDeletedUsers = new EventEmitter<void>();
+  private deletedUser = new EventEmitter<void>();
 
   @Output()
-  private onEditedUser = new EventEmitter<void>();
+  private editedUser = new EventEmitter<void>();
 
   @ViewChild('phone', { static: false })
   private templateVphone: ElementRef;
 
-  public editUserInfo: IUser;
+  public originalUserInfo: IUser;
 
-  public editModeEnabled: boolean = false;
+  public editModeEnabled = false;
 
   private destroyer$ = new Subject();
-  
+
   constructor(
     private userService: UserService
   ) { }
+
+  ngOnInit(): void {
+    this.originalUserInfo = { ...this.userInfo };
+  }
 
   ngOnDestroy(): void {
     this.destroyer$.next();
@@ -58,16 +62,18 @@ export class UserRowComponent implements OnDestroy{
 
     this.userService.editUser(this.userInfo)
       .pipe(takeUntil(this.destroyer$))
-      .subscribe(_ => this.onEditedUser.emit());
+      .subscribe(_ => this.editedUser.emit());
   }
 
   public removeUser(): void {
     this.userService.removeUser(this.userInfo.id)
       .pipe(takeUntil(this.destroyer$))
-      .subscribe(_ =>this.onDeletedUsers.emit());
+      .subscribe(_ => this.deletedUser.emit());
   }
 
   public cancel(): void {
+    this.userInfo = { ...this.originalUserInfo };
+
     this.switchEditMode();
   }
 

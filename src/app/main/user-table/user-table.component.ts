@@ -46,8 +46,8 @@ export class UserTableComponent implements OnInit, OnDestroy {
     dialog.afterClosed$
       .pipe(takeUntil(this.destroyer$))
       .subscribe((userIsAdded: boolean) => {
-      if(userIsAdded) this.getUsers();
-    })
+      if (userIsAdded) { this.getUsers(); }
+    });
   }
 
   public onDeletedUser(): void {

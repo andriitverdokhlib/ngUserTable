@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 import { DialogRef } from '@ngneat/dialog';
 
 import { Subject } from 'rxjs';
@@ -18,12 +19,12 @@ export class AddPannelComponent implements OnDestroy {
   private templateVphone: ElementRef;
 
   public userForm: FormGroup = new FormGroup({
-    "name": new FormControl('', Validators.required),
-    "email": new FormControl('', [
+    name: new FormControl('', Validators.required),
+    email: new FormControl('', [
       Validators.required,
       Validators.email
     ]),
-    "phone": new FormControl('', [
+    phone: new FormControl('', [
       Validators.required,
       Validators.minLength(6)
     ])
@@ -42,7 +43,7 @@ export class AddPannelComponent implements OnDestroy {
   }
 
   private closeDialog(result: boolean): void {
-    this.dialogRef.close(result)
+    this.dialogRef.close(result);
   }
 
   public addUser(): void {

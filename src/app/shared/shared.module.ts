@@ -10,7 +10,7 @@ import { NgxPhoneMaskModule } from 'ngx-phone-mask';
 
 @NgModule({
   declarations: [
-    AddPannelComponent, 
+    AddPannelComponent,
     UserRowComponent
   ],
   imports: [
