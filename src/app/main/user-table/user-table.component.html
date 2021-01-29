@@ -1,12 +1,6 @@
 <div class="container">
-
-    <ng-container *ngIf="isAdding; else addBtn">
-        <add-pannel pannelType="add" (onAddedUser)="onAddedUser($event)"></add-pannel>
-    </ng-container>
-
-    <ng-template #addBtn>
-        <button class="add-btn"(click)="switchAdding()">Add user</button>
-    </ng-template>
+    
+    <button class="add-btn"(click)="openAddPannelDialog()">Add user</button>
 
     <table>
 

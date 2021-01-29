@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnDestroy, Output } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DialogRef } from '@ngneat/dialog';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -12,9 +13,6 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./add-pannel.component.scss']
 })
 export class AddPannelComponent implements OnDestroy {
-
-  @Output() 
-  private onAddedUser = new EventEmitter<boolean>();
 
   public userForm: FormGroup = new FormGroup({
     "name": new FormControl('', Validators.required),
@@ -31,7 +29,8 @@ export class AddPannelComponent implements OnDestroy {
   private destroyer$ = new Subject();
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private dialogRef: DialogRef
   ) {}
 
   ngOnDestroy(): void {
@@ -39,14 +38,18 @@ export class AddPannelComponent implements OnDestroy {
     this.destroyer$.complete();
   }
 
+  private closeDialog(result: boolean): void {
+    this.dialogRef.close(result)
+  }
+
   public addUser(): void {
     this.userService.addUser(this.userForm.value)
       .pipe(takeUntil(this.destroyer$))
-      .subscribe(_ => this.onAddedUser.emit(true));
+      .subscribe(_ => this.closeDialog(true));
   }
 
   public cancel(): void {
-    this.onAddedUser.emit(false);
+    this.closeDialog(false);
   }
 
 }

@@ -30,3 +30,12 @@ input.ng-touched.ng-valid {
     border-radius: 2px;
     border-bottom: 2px solid rgb(95, 173, 95);
 }
+
+.ngneat-dialog-content {
+    width: initial !important;
+    min-height: initial !important;
+}
+
+.ngneat-close-dialog {
+    display: none !important;
+}

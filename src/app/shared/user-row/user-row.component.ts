@@ -45,7 +45,9 @@ export class UserRowComponent implements OnInit, OnDestroy{
   public saveChanges(): void {
     this.switchEditMode();
 
-    this.userService.editUser(this.userInfo).subscribe();
+    this.userService.editUser(this.userInfo)
+      .pipe(takeUntil(this.destroyer$))
+      .subscribe();
   }
 
   public removeUser(): void {

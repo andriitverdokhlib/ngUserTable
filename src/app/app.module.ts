@@ -1,6 +1,7 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { DialogModule } from '@ngneat/dialog';
 
 import { AppComponent } from './app.component';
 
@@ -13,7 +14,8 @@ import { MainModule } from './main/main.module';
   ],
   imports: [
     BrowserModule,
-    MainModule
+    MainModule,
+    DialogModule.forRoot()
   ],
   providers: [
     {
