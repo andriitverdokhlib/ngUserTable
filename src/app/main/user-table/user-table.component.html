@@ -9,7 +9,8 @@
         </tr>
 
         <tr *ngFor="let user of (users$ | async)" user-row 
-            [userInfo]="user" (onDeletedUsers)="onDeletedUser($event)">
+            [userInfo]="user" (onDeletedUsers)="onDeletedUser($event)" 
+            (onEditedUser)="onEditedUser()">
         </tr>
 
     </table>

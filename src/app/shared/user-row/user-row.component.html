@@ -8,7 +8,7 @@
             [(ngModel)]="userInfo.email" required email #email="ngModel" minlength="6">
     </td>
     <td>
-        <input type="text" name="phone" ngxPhoneMask
+        <input type="text" name="phone" ngxPhoneMask #phone
             [(ngModel)]="userInfo.phone" #phone="ngModel" required minlength="6">
     </td>
 

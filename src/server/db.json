@@ -1,22 +1,10 @@
 {
   "users": [
     {
-      "name": "test",
-      "email": "test@gmail.com",
-      "phone": "+123175445",
-      "id": 1
-    },
-    {
-      "name": "test",
+      "name": "Test",
       "email": "22@gmail.com",
-      "phone": "+232323232",
-      "id": 3
-    },
-    {
-      "name": "test",
-      "email": "terer@gmail.com",
-      "phone": "+4117171717",
-      "id": 4
+      "phone": "+3 (809) 592-37-20",
+      "id": 7
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, ElementRef, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DialogRef } from '@ngneat/dialog';
 
@@ -13,6 +13,9 @@ import { UserService } from 'src/app/core/services/user.service';
   styleUrls: ['./add-pannel.component.scss']
 })
 export class AddPannelComponent implements OnDestroy {
+
+  @ViewChild('phone', { static: false })
+  private templateVphone: ElementRef;
 
   public userForm: FormGroup = new FormGroup({
     "name": new FormControl('', Validators.required),
@@ -43,6 +46,9 @@ export class AddPannelComponent implements OnDestroy {
   }
 
   public addUser(): void {
+    const phoneWithBracers = this.templateVphone.nativeElement.value;
+
+    this.userForm.patchValue({phone: phoneWithBracers});
     this.userService.addUser(this.userForm.value)
       .pipe(takeUntil(this.destroyer$))
       .subscribe(_ => this.closeDialog(true));

@@ -54,4 +54,8 @@ export class UserTableComponent implements OnInit, OnDestroy {
     this.getUsers();
   }
 
+  public onEditedUser(): void {
+    this.getUsers();
+  }
+
 }

@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { 
+  ChangeDetectionStrategy,
+  Component, ElementRef, EventEmitter, 
+  Input, OnDestroy, Output, ViewChild 
+} from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -9,9 +13,10 @@ import { UserService } from 'src/app/core/services/user.service';
 @Component({
   selector: '[user-row]',
   templateUrl: './user-row.component.html',
-  styleUrls: ['./user-row.component.scss']
+  styleUrls: ['./user-row.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserRowComponent implements OnInit, OnDestroy{
+export class UserRowComponent implements OnDestroy{
 
   @Input('userInfo')
   public userInfo: IUser;
@@ -19,7 +24,13 @@ export class UserRowComponent implements OnInit, OnDestroy{
   @Output()
   private onDeletedUsers = new EventEmitter<void>();
 
-  private originalUserInfo: IUser;
+  @Output()
+  private onEditedUser = new EventEmitter<void>();
+
+  @ViewChild('phone', { static: false })
+  private templateVphone: ElementRef;
+
+  public editUserInfo: IUser;
 
   public editModeEnabled: boolean = false;
 
@@ -28,10 +39,6 @@ export class UserRowComponent implements OnInit, OnDestroy{
   constructor(
     private userService: UserService
   ) { }
-
-  ngOnInit(): void {
-    this.originalUserInfo = { ...this.userInfo };
-  }
 
   ngOnDestroy(): void {
     this.destroyer$.next();
@@ -43,11 +50,15 @@ export class UserRowComponent implements OnInit, OnDestroy{
   }
 
   public saveChanges(): void {
+
+    const phoneWithBracers = this.templateVphone.nativeElement.value;
+    this.userInfo.phone = phoneWithBracers;
+
     this.switchEditMode();
 
     this.userService.editUser(this.userInfo)
       .pipe(takeUntil(this.destroyer$))
-      .subscribe();
+      .subscribe(_ => this.onEditedUser.emit());
   }
 
   public removeUser(): void {
@@ -57,8 +68,6 @@ export class UserRowComponent implements OnInit, OnDestroy{
   }
 
   public cancel(): void {
-    this.userInfo = { ...this.originalUserInfo };
-
     this.switchEditMode();
   }
 
